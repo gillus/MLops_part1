@@ -1,5 +1,5 @@
 import pytest
-from model.model_training import model_metrics
+from model.utils import model_metrics
 from data.datamanager import data_loader
 import joblib
 
