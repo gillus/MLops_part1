@@ -9,25 +9,21 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report
 from sklearn.ensemble import RandomForestClassifier
 import json
+import os
 import joblib
-
-
-def data_loader(path: str):
-    dataset = pd.read_csv(path)
-    target_column = 'income'
-    y_training = dataset[target_column]
-    x_training = dataset.drop(target_column, axis=1)
-
-    return x_training, y_training
+from data.datamanager import data_loader
 
 
 def train_random_forest_model(data_path: str,
                               parameters=None):
 
     if parameters is None:
-        parameters = dict(n_estimators=100, max_depth=4, criterion='gini',
-                          min_sample_leaf=1)
-
+        if os.path.exists('./params.json'):
+            parameters = json.load(open("params.json", "r"))
+        else:
+            parameters = dict(n_estimators=100, max_depth=4, criterion='gini',
+                              min_sample_leaf=1)
+    print(parameters)
     x_training, y_training = data_loader(data_path)
 
     ordinal_features = x_training.select_dtypes(include="number").columns
@@ -80,3 +76,7 @@ def convert_sklearn_onnx(clf):
 
     return
 
+
+if __name__ == '__main__':
+
+    train_random_forest_model('./data/adult_training.csv')
