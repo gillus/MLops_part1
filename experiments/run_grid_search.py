@@ -7,15 +7,16 @@ import argparse
 import json
 
 
-def grid_search_random_forest():
+def grid_search_random_forest(name_experiment):
 
     max_depth = [10,15]
     criterion = ['gini','entropy']
     min_samples_leaf = [5,10]
     n_estimators= [50,100]
 
-    parameters = product(max_depth, criterion, min_samples_leaf,n_estimators)
+    parameters = product(max_depth, criterion, min_samples_leaf, n_estimators)
     parameters_list = list(parameters)
+
     print('Number of experiments:',len(parameters_list))
 
     # Hyperparameter search
@@ -25,7 +26,7 @@ def grid_search_random_forest():
 
     for i, param in enumerate(parameters_list):
         print('Running experiment number ', i)
-        with mlflow.start_run(run_name='Adult_random_forest'):
+        with mlflow.start_run(run_name=name_experiment):
             # Logging each experiment's inputs
             mlflow.log_param('param-depth', param[0])
             mlflow.log_param('param-criterion', param[1])
