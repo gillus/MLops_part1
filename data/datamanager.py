@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def data_loader(path: str):
-    data_csv_path = './data/adult_training.csv'
+    data_csv_path = path
     dataset = pd.read_csv(data_csv_path)
 
     target_column = 'income'
