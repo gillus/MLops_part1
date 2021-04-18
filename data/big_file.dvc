@@ -1,0 +1,4 @@
+outs:
+- md5: 4e58895a8e0edcfde2f1065240d27bb0
+  size: 34
+  path: big_file
