@@ -29,7 +29,7 @@ def model_metrics(clf, data_path):
     return metrics
 
 
-def package_sklearn_model(x_sample, clf):
+def convert_sklearn_mlflow(clf, x_sample):
 
     signature = infer_signature(x_sample, clf.predict(x_sample))
     input_example = {}

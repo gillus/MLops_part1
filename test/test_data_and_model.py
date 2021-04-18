@@ -2,6 +2,7 @@ import pytest
 from model.utils import model_metrics
 from data.datamanager import data_loader
 import joblib
+import numpy as np
 
 
 @pytest.fixture
@@ -12,13 +13,26 @@ def adult_test_dataset():
 
 
 def test_dataloader(adult_test_dataset):
+    # Test whether there are columns containing unique values within the cleaned dataset or whether there are
     x, y, _ = adult_test_dataset
+
+    # perform unique count for each column of the dataframe
     n_unique = x.nunique(axis=0).values
+
+    # perform unique count for each CATEGORICAL column of the dataframe
+    n_unique_categorical = [x[i].nunique() for i in x.columns[x.dtypes == 'object']]
+
+    # Perform tests on unique counts
     assert n_unique.min() > 1
+    assert all(n_unique_categorical/x.shape[0] < 0.9)
 
 
 def test_model_metrics(adult_test_dataset):
+    # This test checks whether the serialized model obtains a specified performance on the hold out set
+
+    # load data from pytest fixtures and serialized model
+    x, y, data_path = adult_test_dataset
     clf = joblib.load('./model.pkl')
-    metrics = model_metrics(clf, adult_test_dataset[2])
-    assert metrics['>50K']['precision'] > 0.7
-    assert metrics['>50K']['recall'] > 0.1
+    metrics = model_metrics(clf, data_path)
+    assert metrics['>50K']['precision'] > 0.7 #fill here
+    assert metrics['>50K']['recall'] > 0.1 #fill here
