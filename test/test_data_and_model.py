@@ -20,7 +20,7 @@ def test_dataloader(adult_test_dataset):
     n_unique = x.nunique(axis=0).values
 
     # perform unique count for each CATEGORICAL column of the dataframe
-    n_unique_categorical = [x[i].nunique() for i in x.columns[x.dtypes == 'object']]
+    n_unique_categorical = np.array([x[i].nunique() for i in x.columns[x.dtypes == 'object']])
 
     # Perform tests on unique counts
     assert n_unique.min() > 1
