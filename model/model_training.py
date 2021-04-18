@@ -9,6 +9,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report
 from sklearn.ensemble import RandomForestClassifier
 import json
+import joblib
 
 
 def data_loader(path: str):
@@ -49,6 +50,9 @@ def train_random_forest_model(data_path: str,
 
     rf_pipeline = Pipeline(steps=[("preprocessing", x_encoder), ("rf_model", rf_clf)])
     rf_pipeline.fit(x_training, y_training)
+
+    joblib.dump(rf_pipeline, 'model.pkl')
+
     return rf_pipeline
 
 
