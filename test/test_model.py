@@ -1,7 +1,5 @@
 import pytest
 from model.model_training import data_loader, model_metrics
-import sys
-sys.path.append('../')
 
 
 @pytest.fixture
