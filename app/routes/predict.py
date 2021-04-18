@@ -24,16 +24,11 @@ class InputExample(BaseModel):
     hours_per_week: int = 28
     native_country: str = 'United-States'
 
-columns = ['age', 'work_class', 'education', 'marital_status', 'occupation',
-       'relationship', 'race', 'sex', 'capital_gain', 'capital_loss',
-       'hours_per_week', 'native_country']
-
 @router.post("/predict")
 async def predict(instance: InputExample):
     instance_df = pd.DataFrame(instance).T
     instance_df.columns = instance_df.iloc[0]
     instance_df = instance_df[1:]
-
     prediction = model.predict_proba(instance_df)
 
     return {
