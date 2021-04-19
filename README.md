@@ -1,25 +1,21 @@
 # Esercizi pratici
 
 ## Passaggi preliminari
-Entra nella directory del repo e crea un nuovo virtual env. 
+Entra nella directory del repository e crea un nuovo virtual env. 
 ```sh
 $python3 -m venv ./venv_corso
 ```
-Installa i requirements del repository
+Installa i requirements del repository e i pacchetti locali.
 ```sh
 $pip install -r requirements.txt
+$pip install -e .
 ```
 
-Crea un nuovo branch su cui lavorare
-```sh
-$git checkout -b develop
-
-```
 
 ## Creazione di un test
-
+Il file tests/test_data_and_model.py contiene un esempio di test scritto con pytest.
 <details> 
-  <summary>Soluzione</summary>
+  <summary>Possibile soluzione</summary>
 
 df
 </details>
