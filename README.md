@@ -24,7 +24,7 @@ $git checkout -b develop
 df
 </details>
 
-# Creazione di una GitHub Action che automatizzi i test definiti fino ad ora
+## Creazione di una GitHub Action
 Crea una cartella chiamata '.github' all'interno della directory principale. All'interno di questa cartella crea una cartella chiamata 'workflow'.
 
 In quest'ultima crea un file 'CI.yaml' e copia/incolla il seguente codice
@@ -61,7 +61,7 @@ jobs:
 ```
 Effettua un commit e un push e segui la action direttamente su GitHub (repository --> tab 'actions')
 
-# Ricerca iperparametri con mlflow
+## Ricerca iperparametri con mlflow
 Modifica lo script ./experiments/run_grid_search.py cambiando lo spazio di ricerca (aggiungendo iperparametri)
 Fai girare lo script  
 ```sh
@@ -71,4 +71,4 @@ $python experiments/run_grid_search --name python
 
 
 
-# Esercizio 4
+## Esercizio 4
