@@ -13,11 +13,21 @@ $pip install -e .
 
 
 ## Creazione di un test
-Il file tests/test_data_and_model.py contiene un esempio di test scritto con pytest.
+Il file *tests/test_data_and_model.py* contiene un esempio di test scritto con pytest. Prova a scrivere un altro test che importi il modello serializzato e:
+* Controlli che il classificatore non sia un 'majority classfifier', ovvero che sia in grado di classificare piu' di un etichetta sul test set
+* Controlli che la precisione e la sensitivita' (recall) del modello siano sopra una certa soglia da te scelta.
 <details> 
   <summary>Possibile soluzione</summary>
 
-df
+    def test_model_metrics(adult_test_dataset):
+        x, y, data_path = adult_test_dataset
+        clf = joblib.load('./model.pkl')
+        predictions = clf.predict(x)
+        metrics = classification_report(y, predictions, output_dict=True)
+    
+        assert len(np.unique(predictions)) > 1
+        assert metrics['>50K']['precision'] > 0.7 #fill here
+        assert metrics['>50K']['recall'] > 0.1 #fill here
 </details>
 
 ## Creazione di una GitHub Action
@@ -58,12 +68,12 @@ jobs:
 Effettua un commit e un push e segui la action direttamente su GitHub (repository --> tab 'actions')
 
 ## Ricerca iperparametri con mlflow
-Modifica lo script ./experiments/run_grid_search.py cambiando lo spazio di ricerca (aggiungendo iperparametri)
-Fai girare lo script  
+Modifica lo script ./experiments/run_grid_search.py cambiando lo spazio di ricerca (aggiungendo iperparametri).
+Una volta arricchito la spazio di ricerca fai girare lo script  
 ```sh
-$python experiments/run_grid_search --name python
+$python experiments/run_grid_search
 ```
-
+Quali sono
 
 
 
